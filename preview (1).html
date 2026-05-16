@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WhatsApp Number Checker</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      margin:0;
+    }
+
+    .box{
+      background:white;
+      padding:30px;
+      border-radius:12px;
+      width:350px;
+      text-align:center;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      border:1px solid #ccc;
+      border-radius:8px;
+      font-size:16px;
+      box-sizing:border-box;
+    }
+
+    button{
+      margin-top:15px;
+      width:100%;
+      padding:12px;
+      border:none;
+      background:#25D366;
+      color:white;
+      font-size:16px;
+      border-radius:8px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1ebe5d;
+    }
+
+    #result{
+      margin-top:15px;
+      font-weight:bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>WhatsApp Checker</h2>
+
+    <input
+      type="text"
+      id="number"
+      placeholder="Enter number with country code"
+    />
+
+    <button onclick="checkWhatsApp()">
+      Check Number
+    </button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function checkWhatsApp() {
+
+      let number = document.getElementById("number").value.trim();
+
+      // Remove spaces and +
+      number = number.replace(/\s+/g, '').replace('+', '');
+
+      if(number === ""){
+        document.getElementById("result").innerHTML =
+          "Please enter a number.";
+        return;
+      }
+
+      // WhatsApp link
+      let waLink = "https://wa.me/" + number;
+
+      // Open WhatsApp page
+      let newWindow = window.open(waLink, "_blank");
+
+      // Simple message
+      document.getElementById("result").innerHTML =
+        "Opening WhatsApp...";
+
+      /*
+        IMPORTANT:
+        Due to WhatsApp restrictions, HTML/JavaScript
+        cannot directly verify if a number exists on WhatsApp.
+
+        It can only open wa.me link.
+        If the number is not on WhatsApp,
+        WhatsApp itself will show:
+        "Phone number shared via URL is invalid."
+      */
+    }
+  </script>
+
+</body>
+</html>
